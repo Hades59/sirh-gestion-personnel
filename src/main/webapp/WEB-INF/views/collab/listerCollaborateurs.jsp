@@ -1,3 +1,4 @@
+<%@page import="dev.sgp.entite.Collaborateur"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<meta http-equiv="X-UA-Compatible">
 <title>SGP App</title>
 
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
 	integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb"
 	crossorigin="anonymous">
+
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -25,6 +27,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
 	integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
 	crossorigin="anonymous"></script>
+
 
 </head>
 
@@ -59,6 +62,23 @@
 		</div>
 	</div>
 	<h1>Les collaborateurs</h1>
+	<script type="text/javascript">
+	$(document).ready(function() {
+
+		$("#btn-Creer").on("click", function(e) {
+			$("#typeNom").html($("#formNom").val());
+			$("#typePrenom").html($("#formPrenom").val());
+			$("#typNomFonct").html($("#formPrenom").val());
+			$("#typeTel").html($("#formTel").val());
+			
+		});
+	
+    function Editer(){
+		document.forms[0].action="<%=request.getContextPath()%>/collaborateurs/editer";
+		document.forms[0].method = "POST";
+		document.forms[0].submit();
+	}
+    </script>
 	<!-- Partie recherche -->
 	<form>
 		<div class="row">
@@ -97,50 +117,51 @@
 			</div>
 		</div>
 	</form>
-	<!-- Partie fiches -->
-	<div class="form-group col">
-		<!-- Fiche 1 -->
-		<div class="form-group card" style="width: 20rem">
-			<!-- En-tête -->
-			<div class="card-header">
-				<h5>NOM Prénom</h5>
-			</div>
-			<!-- Contenu -->
-			<div class="col text-center">
-				<!-- Photo -->
-				<div>
-					<img class="form-group mt-3 mb-3 mr-3 ml-3"
-						src=photos-Main-Coon.jpg " width=100px height=150px>
+	<div class="form-group row">
+		<%
+			List<Collaborateur> listeNoms = (List<Collaborateur>) request.getAttribute("listeNoms");
+			for (Collaborateur collab : listeNoms) {
+		%><!-- Partie fiches -->
+		<div class="form-group col">
+
+			<!-- Fiche 1 -->
+			<div class="form-group card" style="width: 20rem">
+				<!-- En-tête -->
+				<div class="card-header">
+					<h5><%=collab.getNom()%>
+						<%=collab.getPrenom()%></h5>
 				</div>
-				<div class="col"></div>
-				<!-- Info -->
-				<div class="col">
-					<div class="form-group row">Fonction:</div>
-					<div class="form-group row">Département:</div>
-					<div class="form-group row">Email:</div>
-					<div class="form-group row">Téléphone:</div>
-				</div>
-				<!-- Bouton Editer -->
-				<div class="form-group col-sm">
-					<button type="button" id="btn-Creer" class="btn btn-outline-dark"
-						href="nouveau.html" data-toggle="modal"
-						data-target="#exampleModalLong">
-						<a href="creer.html"> Éditer</a>
-					</button>
+				<%collab.getEmailPro(collab.getNom(), collab.getPrenom()); %>
+				<!-- Contenu -->
+				<div class="col text-center">
+					<!-- Photo -->
+					<div>
+						<img class="form-group mt-3 mb-3 mr-3 ml-3"
+							src="../image/photos-Main-Coon.jpg" width=100px height=150px>
+					</div>
+					<div class="col"></div>
+					<!-- Info -->
+					<div class="col">
+						<div class="form-group row">Fonction:<div id="typeNomFonct" class="col"></div></div>
+						<div class="form-group row">Département:<div id="typeDept" class="col"></div></div>
+						<div class="form-group row">Email:<div class="col"><%=collab.getEmailPro()%></div></div>
+						<div class="form-group row">Téléphone:<div id="typeTel" class="col"></div></div>
+					</div>
+					<!-- Bouton Editer -->
+					<div class="form-group col-sm">
+<!-- 						<button type="button" id="btn-Creer" onClick="Editer();" class="btn btn-outline-dark" -->
+<!-- 							href="nouveau.html" data-toggle="modal" -->
+<!-- 							data-target="#exampleModalLong">Éditer -->
+ 							<a href="<%=request.getContextPath()%>/collaborateurs/editer?id=<%= collab.getId()%>" class="btn btn-outline-dark" onClick="Editer();"> Éditer</a> 
+<!-- 						</button> -->
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<ul>
-		<%
-			List<String> listeNoms = (List<String>) request.getAttribute("listeNoms");
-			for (String nom : listeNoms) {
-		%>
-		<li><%=nom%></li>
 		<%
 			}
 		%>
-	</ul>
+	</div>
 </body>
 <style>
 #btn-Creer {
