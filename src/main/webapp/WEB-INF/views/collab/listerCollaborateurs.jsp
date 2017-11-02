@@ -69,6 +69,7 @@
 			$("#typeNom").html($("#formNom").val());
 			$("#typePrenom").html($("#formPrenom").val());
 			$("#typNomFonct").html($("#formPrenom").val());
+			$("#typeDept").html($("#formDept").val());
 			$("#typeTel").html($("#formTel").val());
 			
 		});

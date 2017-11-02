@@ -4,8 +4,7 @@
 package dev.sgp.web;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -65,7 +64,20 @@ public class EditerCollaborateurController extends HttpServlet{
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		//doTeg(req, resp);
+		String matricule = req.getParameter("hiddenMatricule");
+		Optional<Collaborateur> opCol=Constantes.COLLAB_SERVICE.listerCollaborateurs().stream().filter(col -> col.getMatricule().equals(matricule)).findFirst();
+		if(opCol.isPresent()){
+			Collaborateur col=opCol.get();
+			col.setNom(req.getParameter("typeNom"));
+			col.setPrenom(req.getParameter("typePrenom"));
+			//col.setDateNaiss(req.getParameter("typeDateN"));
+			col.setAdresse(req.getParameter("typeAdr"));
+			col.setNumSecuSoc(req.getParameter("typeNumSecu"));
+			col.setTel(req.getParameter("typeTel"));
+			
+		}
+		
+		//		//doTeg(req, resp);
 //		
 //		String nom = req.getParameter("Nom");
 //		String prenom = req.getParameter("Prenom");

@@ -104,6 +104,7 @@
 						<%=collab.getPrenom()%>
 						-
 						<%=collab.getMatricule()%>
+						<input type=hidden name="hiddenMatricule" value="<%=collab.getMatricule()%>"></input>
 					</h2>
 				</div>
 				<div class="form-group col">
@@ -139,7 +140,7 @@
 						<label for="civilite" class="form-label">Civilité</label>
 					</div>
 					<div class="form-group col-sm-7">
-						<select id="civilite" class="form-control">
+						<select id="civilite" class="form-control" name="typeCivilite">
 							<option></option>
 							<option>Mlle</option>
 							<option>Mme</option>
@@ -151,7 +152,7 @@
 					<label for="formNom" class="col-sm-3">Nom</label>
 					<div class="col-sm-9">
 						<input type="text" class="col-sm-9" id="formNom"
-							value="<%=collab.getNom()%>" placeholder="" required>
+							value="<%=collab.getNom()%>" name="typeNom" placeholder="" required>
 						<div class="invalid-feedback">Le nom est obligatoire.</div>
 					</div>
 				</div>
@@ -159,14 +160,14 @@
 					<label for="formPrenom" class="col-sm-3">Prénom</label>
 					<div class="col-sm-9">
 						<input type="text" class="col-sm-9" id="formPrenom"
-							value="<%=collab.getPrenom()%>" placeholder="" required>
+							value="<%=collab.getPrenom()%>" name="typePrenom" placeholder="" required>
 						<div class="invalid-feedback">Le nom est obligatoire.</div>
 					</div>
 				</div>
 				<div class="form-group row">
 					<label for="formDateN" class="col-sm-3">Date de naissance</label>
 					<div class="col-sm-9">
-						<div class="col-sm-9" id="formDateN"><%=collab.getDateNaiss()%></div>
+						<div class="col-sm-9" id="formDateN" name="typeDateN"><%=collab.getDateNaiss()%></div>
 						<div class="invalid-feedback">La date de naissance est
 							obligatoire.</div>
 					</div>
@@ -175,7 +176,7 @@
 					<label for="formAdr" class="col-sm-3">Adresse</label>
 					<div class="col-sm-9">
 						<input type="text" id="formAdr" class="col-sm-9" rows="3"
-							value="<%=collab.getAdresse()%>" placeholder="" required>
+							value="<%=collab.getAdresse()%>" name="typeAdr" placeholder="" required>
 						<div class="invalid-feedback">L'adresse est obligatoire.</div>
 					</div>
 				</div>
@@ -184,7 +185,7 @@
 						sécurité social</label>
 					<div class="col-sm-9">
 						<input type="text" class="col-sm-9" id="formNumSecu"
-							value="<%=collab.getNumSecuSoc()%>" placeholder="" required>
+							value="<%=collab.getNumSecuSoc()%>" name="typeNumSecu" placeholder="" required>
 						<div class="invalid-feedback">Le numéro de sécurité social
 							est obligatoire.</div>
 					</div>
@@ -192,7 +193,7 @@
 				<div class="form-group row">
 					<label for="formTel" class="col-sm-3">Téléphone</label>
 					<div class="col-sm-9">
-						<input type="text" class="col-sm-9" id="formTel" placeholder=""
+						<input type="text" class="col-sm-9" id="formTel" name="typeTel" placeholder=""
 							required>
 						<div class="invalid-feedback">Le numéro de téléphone est
 							obligatoire.</div>
@@ -217,7 +218,7 @@
 					<label for="formDept" class="col-sm-3">Département</label>
 					<div class="col-sm-9">
 						<div class="form-group col-sm-9">
-							<select id="dept" class="form-control">
+							<select id="dept" class="form-control" name="typeDept">
 								<option selected></option>
 								<option value="Compta">Comptabilité</option>
 								<option value="RH">Ressources Humaines</option>
@@ -270,8 +271,7 @@
 				<%-- 				class="float-right btn btn-outline-dark" href="<%=request.getContextPath()%>/collaborateurs/lister" --%>
 				<!-- 				data-toggle="modal" data-target="#exampleModalLong"> -->
 				<!-- 				Sauvegarder</button> -->
-				<a href=""
-					<%=request.getContextPath()%>/collaborateurs/lister" class="float-right btn btn-outline-dark"
+				<a href="<%=request.getContextPath()%>/collaborateurs/lister" class="float-right btn btn-outline-dark"
 					onClick="Svg();">Sauvegarder</a>
 			</div>
 		</div>

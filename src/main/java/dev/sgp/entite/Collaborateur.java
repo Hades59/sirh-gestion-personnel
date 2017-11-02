@@ -28,6 +28,8 @@ public class Collaborateur {
 	String adresse;
 	/** numSecuSoc : String */
 	String numSecuSoc;
+	/** tel : String */
+	String tel;
 	/** emailPro : String */
 	String emailPro;
 	/** photo : String */
@@ -184,5 +186,17 @@ public class Collaborateur {
 	 */
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	/**
+	 * @return the tel
+	 */
+	public String getTel() {
+		return tel;
+	}
+	/**
+	 * @param tel the tel to set
+	 */
+	public void setTel(String tel) {
+		this.tel = tel;
 	}
 }
